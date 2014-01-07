@@ -1,65 +1,12 @@
-<!doctype html>
-
-<html>
-    <head>
-        <title>{{ type['UTTypeIdentifier'] }}</title>
-
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
-
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
-
-    </head>
-
-    <body>
-
-       <!-- Fixed navbar -->
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/">UTI Type Browser</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Index</a></li>
-            <!--<li><a href="#about">About</a></li>-->
-            <!--<li><a href="#contact">Contact</a></li>-->
-            <!--<li class="dropdown">-->
-              <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>-->
-              <!--<ul class="dropdown-menu">-->
-                <!--<li><a href="#">Action</a></li>-->
-                <!--<li><a href="#">Another action</a></li>-->
-                <!--<li><a href="#">Something else here</a></li>-->
-                <!--<li class="divider"></li>-->
-                <!--<li class="dropdown-header">Nav header</li>-->
-                <!--<li><a href="#">Separated link</a></li>-->
-                <!--<li><a href="#">One more separated link</a></li>-->
-              <!--</ul>-->
-            <!--</li>-->
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </div>
-
-    <div class="container">
-
-      <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron">
-        <!--<h1>Navbar example</h1>-->
-        <!--<p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>-->
-        <!--<p>To see the difference between static and fixed top navbars, just scroll.</p>-->
-        <!--<p>-->
-          <!--<a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>-->
-        <!--</p>-->
+{% extends "base.html" %}
+{% block title %}{{ type['UTTypeIdentifier'] }}{% endblock %}
+{% block head %}
+    {{ super() }}
+    <!--<style type="text/css">-->
+        <!--.important { color: #336699; }-->
+    <!--</style>-->
+{% endblock %}
+{% block content %}
 
         <table class="table table-bordered">
             {% if 'UTTypeIconFile' in type %}
@@ -71,7 +18,7 @@
 
             <tr>
                 <th>Identifier</th>
-                <td><a href="">{{ type['UTTypeIdentifier'] }}</a></td>
+                <td><a href="#">{{ type['UTTypeIdentifier'] }}</a></td>
             </tr>
             <tr>
                 <th>Description</th>
@@ -82,7 +29,7 @@
             <tr>
                 <th>File Extension(s)</th>
                 <td>
-                    <ul>
+                    <ul class="list-inline">
                     {% for mime_type in type['UTTypeTagSpecification']['public.filename-extension'] %}
                         <li>{{ mime_type }}</li>
                     {% endfor %}
@@ -95,7 +42,7 @@
             <tr>
                 <th>Mime Type(s)</th>
                 <td>
-                    <ul>
+                    <ul class="list-inline">
                     {% for mime_type in type['UTTypeTagSpecification']['public.mime-type'] %}
                         <li>{{ mime_type }}</li>
                     {% endfor %}
@@ -108,9 +55,9 @@
             <tr>
                 <th>Conforms to:</th>
                 <td>
-                    <ul>
+                    <ul class="list-inline">
                     {% for identifier in type['UTTypeConformsTo']|sort %}
-                        <li><a href="{{ identifier }}">{{ identifier }}</a></li>
+                        <li><a href="/identifier/{{ identifier }}">{{ identifier }}</a></li>
                     {% endfor %}
                     </ul>
                 </td>
@@ -121,9 +68,9 @@
             <tr>
                 <th>Conformed by:</th>
                 <td>
-                    <ul>
+                    <ul class="list-inline">
                     {% for identifier in type['UTTypeConformedBy']|sort %}
-                        <li><a href="{{ identifier }}">{{ identifier }}</a></li>
+                        <li><a href="/identifier/{{ identifier }}">{{ identifier }}</a></li>
                     {% endfor %}
                     </ul>
                 </td>
@@ -139,19 +86,4 @@
 
         </table>
 
-
-
-      </div>
-
-    </div> <!-- /container -->
-
-
-
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://code.jquery.com/jquery.js"></script>
-
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-
-    </body>
-</html>
+{% endblock %}

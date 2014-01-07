@@ -3,6 +3,7 @@ __author__ = 'schwa'
 from flask import Flask
 from flask import render_template
 from flask import url_for
+from flask import request
 import json
 import os
 
@@ -43,19 +44,30 @@ for t in types_by_identifier.values():
 
 @app.route("/")
 def index():
-    return render_template('hello.html', all_types = types_by_identifier.values())
+    return render_template('index.html', all_types = types_by_identifier.values())
 
-@app.route("/<identifier>")
+@app.route("/identifier/<identifier>")
 def type_(identifier):
     t = types_by_identifier[identifier]
     image_path = url_for('static', filename='iconsets')
     return render_template('type.html', type = t, image_path = image_path)
 
-# if __name__ == "__main__":
-#     host = '0.0.0.0'
-#     port = int(os.environ.get('PORT', 5000))
-#     if os.environ.get('DEVELOPMENT', False):
-#         host = None
-#     else:
-#         app.debug = True
-#     app.run(host = host, port = port)
+@app.route('/search', methods = ['POST'])
+def search():
+
+    query = request.form['query']
+
+    hits = []
+    for t in types_by_identifier.values():
+        if query in t['UTTypeIdentifier']:
+            hits.append(t)
+
+    return render_template('search.html', all_types = hits)
+
+
+if __name__ == "__main__":
+    # host = ''
+    # port = int(os.environ.get('PORT', 5000))
+    if os.environ.get('DEVELOPMENT', False):
+        app.debug = True
+    app.run()
