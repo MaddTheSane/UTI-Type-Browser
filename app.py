@@ -88,3 +88,5 @@ if __name__ == "__main__":
     if os.environ.get('PYCHARM_HOSTED', False):
         app.debug = True
         app.run()
+    else:
+        app.run()
