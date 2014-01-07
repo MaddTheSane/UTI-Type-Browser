@@ -51,13 +51,11 @@ def type_(identifier):
     image_path = url_for('static', filename='iconsets')
     return render_template('type.html', type = t, image_path = image_path)
 
-if __name__ == "__main__":
-
-    host = '0.0.0.0'
-    port = int(os.environ.get('PORT', 5000))
-    if os.environ.get('DEVELOPMENT', False):
-        host = None
-    else:
-        app.debug = True
-
-    app.run(host = host, port = port)
+# if __name__ == "__main__":
+#     host = '0.0.0.0'
+#     port = int(os.environ.get('PORT', 5000))
+#     if os.environ.get('DEVELOPMENT', False):
+#         host = None
+#     else:
+#         app.debug = True
+#     app.run(host = host, port = port)
