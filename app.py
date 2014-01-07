@@ -33,18 +33,37 @@ for t in types_by_identifier.values():
         for conforming_t in t['UTTypeConformsTo']:
             if conforming_t not in types_by_identifier:
                 types_by_identifier[conforming_t] = { 'UTTypeIdentifier': conforming_t}
-                print conforming_t
 
             if 'UTTypeConformedBy' not in types_by_identifier[conforming_t]:
                 types_by_identifier[conforming_t]['UTTypeConformedBy'] = []
             types_by_identifier[conforming_t]['UTTypeConformedBy'].append(t['UTTypeIdentifier'])
 
-
-
-
 @app.route("/")
-def index():
-    return render_template('index.html', all_types = types_by_identifier.values())
+@app.route("/roots")
+def roots():
+    hits = []
+    for t in types_by_identifier.values():
+        if 'UTTypeConformsTo' not in t or not t['UTTypeConformsTo']:
+            hits.append(t)
+    hits = sorted(hits, key = lambda t:t['UTTypeIdentifier'])
+    return render_template('list.html', all_types = hits)
+
+@app.route("/all")
+def all():
+    hits = types_by_identifier.values()
+    hits = sorted(hits, key = lambda t:t['UTTypeIdentifier'])
+    return render_template('list.html', all_types = hits)
+
+@app.route("/public")
+def public():
+    hits = []
+    for t in types_by_identifier.values():
+        if 'UTTypeConformsTo' not in t or not t['UTTypeConformsTo']:
+            if t['UTTypeIdentifier'].startswith('public.'):
+                hits.append(t)
+
+    hits = sorted(hits, key = lambda t:t['UTTypeIdentifier'])
+    return render_template('list.html', all_types = hits)
 
 @app.route("/identifier/<identifier>")
 def type_(identifier):
@@ -62,12 +81,10 @@ def search():
         if query in t['UTTypeIdentifier']:
             hits.append(t)
 
-    return render_template('search.html', all_types = hits)
+    return render_template('list.html', all_types = hits)
 
 
 if __name__ == "__main__":
-    # host = ''
-    # port = int(os.environ.get('PORT', 5000))
-    if os.environ.get('DEVELOPMENT', False):
+    if os.environ.get('PYCHARM_HOSTED', False):
         app.debug = True
-    app.run()
+        app.run()
