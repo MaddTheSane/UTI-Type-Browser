@@ -4,6 +4,7 @@ from flask import Flask
 from flask import render_template
 from flask import url_for
 import json
+import os
 
 app = Flask(__name__)
 
@@ -51,6 +52,12 @@ def type_(identifier):
     return render_template('type.html', type = t, image_path = image_path)
 
 if __name__ == "__main__":
-    app.debug = True
-    app.run()
 
+    host = '0.0.0.0'
+    port = int(os.environ.get('PORT', 5000))
+    if os.environ.get('DEVELOPMENT', False):
+        host = None
+    else:
+        app.debug = True
+
+    app.run(host = host, port = port)
