@@ -1,11 +1,14 @@
 {% extends "base.html" %}
+
 {% block title %}{{ type['UTTypeIdentifier'] }}{% endblock %}
+
 {% block head %}
     {{ super() }}
     <!--<style type="text/css">-->
         <!--.important { color: #336699; }-->
     <!--</style>-->
 {% endblock %}
+
 {% block content %}
 
         <table class="table table-bordered">
@@ -20,6 +23,7 @@
                 <th>Identifier</th>
                 <td><a href="#">{{ type['UTTypeIdentifier'] }}</a></td>
             </tr>
+
             <tr>
                 <th>Description</th>
                 <td>{{ type['UTTypeDescription'] }}</td>

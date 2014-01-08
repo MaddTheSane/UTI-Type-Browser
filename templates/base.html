@@ -1,106 +1,88 @@
 <!doctype html>
 
 <html>
-    <head>
-        <title>{% block title %}{% endblock %}</title>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<meta name="description" content="">-->
+    <!--<meta name="author" content="">-->
+    <!--<link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">-->
 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <title>{% block title %}{% endblock %}</title>
 
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 
-    </head>
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
 
-    <body>
+</head>
 
-       <!-- Fixed navbar -->
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">-->
-            <!--<span class="sr-only">Toggle navigation</span>-->
-            <!--<span class="icon-bar"></span>-->
-            <!--<span class="icon-bar"></span>-->
-            <!--<span class="icon-bar"></span>-->
-          <!--</button>-->
-          <a class="navbar-brand" href="/">UTI Type Browser</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <!--<li class="active"><a href="/">Index</a></li>-->
+<body>
+
+<nav class="navbar navbar-default navbar-static-top" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">UTI Type Browser</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
             <li><a href="/">Roots</a></li>
             <li><a href="/all">All</a></li>
             <li><a href="/public">Public Roots</a></li>
-            <li><a href="https://github.com/schwa/UTI-Type-Browser">Github</a></li>
-            <li><a href="http://twitter.com/schwa">Contact</a></li>
-            <li>
-                <form class="navbar-form navbar-left" role="search" action="{{url_for('search')}}" method="post">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search" name="query">
-                    </div>
-                    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
-                </form>
-            </li>
-
-
-            <!--<li class="dropdown">-->
-              <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>-->
-              <!--<ul class="dropdown-menu">-->
-                <!--<li><a href="#">Action</a></li>-->
-                <!--<li><a href="#">Another action</a></li>-->
-                <!--<li><a href="#">Something else here</a></li>-->
-                <!--<li class="divider"></li>-->
-                <!--<li class="dropdown-header">Nav header</li>-->
-                <!--<li><a href="#">Separated link</a></li>-->
-                <!--<li><a href="#">One more separated link</a></li>-->
-              <!--</ul>-->
-            <!--</li>-->
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
+        </ul>
+        <form class="navbar-form navbar-left" role="search" action="{{url_for('search')}}" method="post">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search" name="query">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://github.com/schwa/UTI-Type-Browser">
+                <!--<img width=12 height=12 src="{{ url_for('static', filename='GitHub-Mark-32px.png') }}">-->
+                Github</a></li>
+            <li><a href="http://twitter.com/schwa">
+                <!--<img width=12 height=12 src="{{ url_for('static', filename='newschwa_512.png') }}">-->
+                Contact</a></li>
+        </ul>
     </div>
+    <!-- /.navbar-collapse -->
+</nav>
 
-    <div class="container">
+<div class="container">
+    {% block content %}{% endblock %}
+</div>
+<!-- /container -->
 
-      <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron">
-        <!--<h1>Navbar example</h1>-->
-        <!--<p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>-->
-        <!--<p>To see the difference between static and fixed top navbars, just scroll.</p>-->
-        <!--<p>-->
-          <!--<a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>-->
-        <!--</p>-->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://code.jquery.com/jquery.js"></script>
 
-        {% block content %}{% endblock %}
+<!-- Latest compiled and minified JavaScript -->
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 
-      </div>
+<script type="text/javascript">
+    var _gauges = _gauges || [];
+    (function () {
+        var t = document.createElement('script');
+        t.type = 'text/javascript';
+        t.async = true;
+        t.id = 'gauges-tracker';
+        t.setAttribute('data-site-id', '52cca0b4e32bb47924001708');
+        t.src = '//secure.gaug.es/track.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(t, s);
+    })();
+</script>
 
-    </div> <!-- /container -->
-
-
-
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://code.jquery.com/jquery.js"></script>
-
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-
-        <script type="text/javascript">
-          var _gauges = _gauges || [];
-          (function() {
-            var t   = document.createElement('script');
-            t.type  = 'text/javascript';
-            t.async = true;
-            t.id    = 'gauges-tracker';
-            t.setAttribute('data-site-id', '52cca0b4e32bb47924001708');
-            t.src = '//secure.gaug.es/track.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(t, s);
-          })();
-        </script>
-
-    </body>
+</body>
 </html>
