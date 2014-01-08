@@ -11,6 +11,7 @@
     <!--<p class="important">-->
       <!--Welcome on my awesome homepage.-->
     <!--</p>-->
+    <p>{{ all_types | count }} types</p>
     <ul>
         {% for type in all_types %}
         <li><a href="identifier/{{ type['UTTypeIdentifier'] }}">{{ type['UTTypeIdentifier'] }}</a></li>
