@@ -57,9 +57,16 @@ def search():
     return render_template('list.html', all_types = hits)
 
 
-if __name__ == "__main__":
-    if os.environ.get('PYCHARM_HOSTED', False):
-        app.debug = True
-        app.run()
-    else:
-        app.run()
+# if __name__ == "__main__":
+#     if os.environ.get('PYCHARM_HOSTED', False):
+#         app.debug = True
+#         app.run()
+#     else:
+#         app.run()
+
+if __name__ == '__main__':
+    host = '0.0.0.0'
+    port = int(os.environ.get('PORT', 5000))
+    if os.environ.get('DEVELOPMENT', False):
+        host = None
+    app.run(host = host, port = port)
